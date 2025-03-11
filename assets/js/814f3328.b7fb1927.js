@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhybr_docs=self.webpackChunkhybr_docs||[]).push([[472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Introducing Hybr","permalink":"/blog/welcome","unlisted":false,"date":"2025-03-11T00:00:00.000Z"}]}')}}]);
