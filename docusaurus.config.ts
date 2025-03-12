@@ -27,7 +27,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/rasjonell/hybr-docs/tree/main/docs/',
+          editUrl: 'https://github.com/rasjonell/hybr-docs/tree/master/',
         },
         blog: {
           showReadingTime: true,
@@ -35,7 +35,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          editUrl: 'https://github.com/rasjonell/hybr-docs/tree/main/blog/',
+          editUrl: 'https://github.com/rasjonell/hybr-docs/tree/master/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
