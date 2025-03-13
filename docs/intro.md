@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-#  Intro
+#  Qickstart Guide
 
 Let's discover **Hybr in less than 5 minutes**.
 
@@ -25,6 +25,7 @@ This guide will walk you through installing Hybr on your system and setting up y
 
 ### Prerequisites
 
+*   Tailscale (Check out their [quickstart guide](https://tailscale.com/kb/1017/install) if you don't have tailscale yet)
 *   A Linux-based operating system (tested on Arch, but *should* work on Ubuntu, Debian, and its derivatives)
 *   `sudo` privileges (required for service installation)
 
@@ -67,12 +68,12 @@ You're now ready to start managing your self-hosted services with Hybr!
 
 ## Using Hybr
 
-Once Hybr is installed, you can interact with it through the command-line interface (CLI) or the web console. The steps bellow assume you have accepted the default services.
+Once Hybr is installed, you can interact with it through the command-line interface (CLI) or the web console. The steps should walk through the setup if you accepted the default services
 
-### Accessing your Services via Tailscale VPN
+### Step 1: Accessing your Services via Tailscale VPN
 Hybr uses Tailscale to ensure secure access to your services within your private network. Make sure Tailscale is installed and active on any device you want to use to reach your Hybr services.
 
-### Accessing the Web Console
+### Step 2: Accessing the Web Console
 
 To access the web console, simply navigate to `localhost:8080/_hybr` on the host machine for hybr, or use the machine's MagicDNS address: `${HOSTNAME}.${MAGIC_DNS}/_hybr`
 
@@ -87,7 +88,11 @@ To access the web console, simply navigate to `localhost:8080/_hybr` on the host
 ![Hybr Console](/img/hybr-console.png)
 
 ### Managing Services with the CLI
-- List all installed services and their status:
+
+Hybr CLI can be used to retrieve information about your services and to manage them
+
+For example, to list installed services you can run:
+
 ```bash
 hybr services
 ```
@@ -114,115 +119,4 @@ Flags:
 Use "hybr services [command] --help" for more information about a command.
 ```
 
-- Show single service information
-
-```bash
-hybr services -s nextcloud info
-```
-
-```bash
-[Name]             nextcloud
-[Status]           ✅ running
-[Global URL]       https://{HOST}.{MAGIC_DNS}/
-[Local URL]        localhost:8281
-[Install Date]     Monday, 10-Mar-25 17:02:59 UTC
-[Last Start Date]  Monday, 10-Mar-25 17:02:59 UTC
-```
-
-
-- Show service components
-
-```bash
-hybr services -s nextcloud components
-```
-
-```bash
------------------------------
-Name   Version  Status     
------------------------------
-db     10.11    ✅ running   
-redis  alpine   ✅ running   
-app    latest   ✅ running   
-```
-
-- Read service logs
-
-```bash
-hybr services -s nextcloud logs
-```
-
-```bash
-[nextcloud] app-1    | 172.19.0.1 - - [12/Mar/2025:13:25:23 +0000] "GET /index.php/apps/files/preview-service-worker.js HTTP/1.1" 200 2767 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0"
-[nextcloud] app-1    | 172.19.0.1 - - [12/Mar/2025:13:25:24 +0000] "GET /index.php/apps/files/preview-service-worker.js HTTP/1.1" 200 2765 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0"
-[nextcloud] app-1    | 172.19.0.1 - - [12/Mar/2025:13:25:25 +0000] "GET /index.php/apps/files/preview-service-worker.js HTTP/1.1" 200 2771 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0"
-```
-
-- Start/Stop services
-
-```bash
-hybr services -s nextcloud stop
-```
-
-```bash
-[docker]  Container nextcloud-app-1  Stopping
-[docker]  Container nextcloud-app-1  Stopped
-[docker]  Container nextcloud-app-1  Removing
-[docker]  Container nextcloud-app-1  Removed
-[docker]  Container nextcloud-db-1  Stopping
-[docker]  Container nextcloud-redis-1  Stopping
-[docker]  Container nextcloud-redis-1  Stopped
-[docker]  Container nextcloud-redis-1  Removing
-[docker]  Container nextcloud-redis-1  Removed
-[docker]  Container nextcloud-db-1  Stopped
-[docker]  Container nextcloud-db-1  Removing
-[docker]  Container nextcloud-db-1  Removed
-[docker]  Volume nextcloud_db  Removing
-[docker]  Volume nextcloud_nextcloud  Removing
-[docker]  Network nextcloud_default  Removing
-[docker]  Volume nextcloud_db  Removed
-[docker]  Network nextcloud_default  Removed
-[docker]  Volume nextcloud_nextcloud  Removed
-```
-
-Now if we check the service status we can see that it's stopped.
-
-```bash
-hybr services -s nextcloud
-
-nextcloud  🛑 stopped
-```
-
-To start a service you can run:
-
-```bash
-hybr services -s nextcloud start
-```
-
-```bash
-[docker]  Network nextcloud_default  Creating
-[docker]  Network nextcloud_default  Created
-[docker]  Volume "nextcloud_nextcloud"  Creating
-[docker]  Volume "nextcloud_nextcloud"  Created
-[docker]  Volume "nextcloud_db"  Creating
-[docker]  Volume "nextcloud_db"  Created
-[docker]  Container nextcloud-redis-1  Creating
-[docker]  Container nextcloud-db-1  Creating
-[docker]  Container nextcloud-redis-1  Created
-[docker]  Container nextcloud-db-1  Created
-[docker]  Container nextcloud-app-1  Creating
-[docker]  Container nextcloud-app-1  Created
-[docker]  Container nextcloud-redis-1  Starting
-[docker]  Container nextcloud-db-1  Starting
-[docker]  Container nextcloud-redis-1  Started
-[docker]  Container nextcloud-db-1  Started
-[docker]  Container nextcloud-app-1  Starting
-[docker]  Container nextcloud-app-1  Started
-```
-
-Now if we check the service status we can see that it's running.
-
-```bash
-hybr services -s nextcloud
-
-nextcloud  ✅ running
-```
+[Read More About Hybr CLI Here](/docs/cli)
